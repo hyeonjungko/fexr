@@ -46,8 +46,10 @@ def update_db():
     formatted = [(ts, currency, rate) for currency, rate in data['quotes'].items()]
 
     with app.app_context():
-        cur = get_db().cursor()
+        conn = get_db()
+        cur = conn.cursor()
         cur.executemany('INSERT INTO rates(ts, quote, rate) VALUES (?,?,?)', formatted)
+        conn.commit()
 
 def pull_latest_rates():
     #TODO: move apikey from config to secrets.yaml when deploying to Kubernetes
@@ -83,4 +85,6 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
-#update_db()
+update_db()
+with app.app_context():
+    print(query_db('SELECT * FROM rates'))
