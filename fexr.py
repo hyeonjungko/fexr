@@ -45,11 +45,17 @@ def update_db():
     ts = data['timestamp']
     formatted = [(ts, currency, rate) for currency, rate in data['quotes'].items()]
 
-    with app.app_context():
-        conn = get_db()
-        cur = conn.cursor()
-        cur.executemany('INSERT INTO rates(ts, quote, rate) VALUES (?,?,?)', formatted)
-        conn.commit()
+    try:
+        with app.app_context():
+            conn = get_db()
+            cur = conn.cursor()
+            cur.executemany('INSERT INTO rates(ts, quote, rate) VALUES (?,?,?)', formatted)
+            conn.commit()
+    except Exception as err:
+        print('ERROR:',err)
+    finally:
+        conn.close()
+        # TODO: does it add duplicates??
 
 def pull_latest_rates():
     #TODO: move apikey from config to secrets.yaml when deploying to Kubernetes

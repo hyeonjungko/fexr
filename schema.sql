@@ -2,7 +2,8 @@ CREATE TABLE rates(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	ts INTEGER,
 	quote CHAR(3),
-	rate FLOAT
+	rate FLOAT,
+	UNIQUE(ts, quote)
 )
 
 
