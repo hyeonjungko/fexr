@@ -1,9 +1,14 @@
 # fexr
-### foreign exchange rates
+### Foreign EXchange Rates
+View the latest currency rates.
+
+## Update Interval
+All currency rates are updated every hour.
 
 ## Supported Currencies
-All exchange rates are based on the United States Dollar (USD).
 Supports 168 different currencies around the world. 
+
+All exchange rates are based on the United States Dollar (USD).
 
 |Code   |Currency Name|
 |:-----:|:-----------:|

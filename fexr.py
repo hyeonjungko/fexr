@@ -19,20 +19,30 @@ DATABASE = 'rates.db'
 def home():
     # send static html fiel
     # exchange rate updates in page
+    return render_template('index.html') #TODO: this is a placeholder
     pass
 
-@app.route('/rate/<quote>', methods=['GET'])
+@app.route('/api/rate/<quote>', methods=['GET'])
 def latest_rate(quote):
     return str(query_latest_rate(quote))
 
-@app.route('/api', methods=['GET'])
-def rate():
-    print('REQUEST:\n',request.args)
-    return render_template('index.html', rate=1123.44) #TODO: this is a placeholder
+@app.route('/api/rate', methods=['GET'])
+def api_rate():
+    print('REQUEST:  ',request.args)
+    parameters = request.args
+    currency = parameters.get('currency')
+
+    if currency:
+        rate = query_latest_rate(currency)
+        return jsonify(rate)
 
 @app.route('/ping')
 def ping():
     return 'pong'
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
 
 def query_latest_rate(quote):
     row = query_latest_row(quote)
