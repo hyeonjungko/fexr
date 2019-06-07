@@ -3,8 +3,9 @@ import json
 import requests
 import sqlite3
 
+from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
-from flask import g, request, render_template
+from flask import g, jsonify, request, render_template
 from requests.exceptions import HTTPError
 
 
@@ -20,15 +21,41 @@ def home():
     # exchange rate updates in page
     pass
 
+@app.route('/rate/<quote>', methods=['GET'])
+def latest_rate(quote):
+    return str(query_latest_rate(quote))
+
 @app.route('/api', methods=['GET'])
 def rate():
     print('REQUEST:\n',request.args)
-    return render_template('index.html', rate=1123.44)
+    return render_template('index.html', rate=1123.44) #TODO: this is a placeholder
 
 @app.route('/ping')
 def ping():
     return 'pong'
 
+def query_latest_rate(quote):
+    row = query_latest_row(quote)
+    rate = row[0][2] #TODO: create class for currency rates
+    return rate
+
+def query_latest_row(quote=None):
+    """
+    Pull the latest rates from the database
+
+    :param str quote: currency quote
+    """
+    quote_query = ''
+    if quote:
+        quote_query = f"WHERE quote = '{quote}'"
+
+    query = f"""
+            SELECT MAX(ts), quote, rate 
+            FROM rates 
+            {quote_query}
+            GROUP BY quote
+            """
+    return query_db(query)
 
 def query_db(query, args=(), one=False):
     cur = get_db().execute(query, args)
@@ -41,7 +68,7 @@ def update_db():
     Update database with latest exchange rate data
     Run hourly
     """
-    data = pull_latest_rates()
+    data = pull_latest_rate_data()
     ts = data['timestamp']
     formatted = [(ts, currency, rate) for currency, rate in data['quotes'].items()]
 
@@ -57,7 +84,7 @@ def update_db():
         conn.close()
         # TODO: does it add duplicates??
 
-def pull_latest_rates():
+def pull_latest_rate_data():
     #TODO: move apikey from config to secrets.yaml when deploying to Kubernetes
     api_key = config.api_key
     url = f"http://apilayer.net/api/live?access_key={api_key}"
@@ -91,6 +118,24 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
-update_db()
+#update_db()
+"""
+    print(query_db('SELECT MAX(ts), quote, rate FROM rates GROUP BY quote'))
+
 with app.app_context():
-    print(query_db('SELECT * FROM rates'))
+    print(query_latest_row())
+    print('\n',query_latest_rate('KRW'))
+"""
+if __name__ == '__main__':
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(update_db, 'interval', hours=1)
+    scheduler.start()
+
+    #Start Flask
+    app.run(debug=True)
+    """
+    update_db()
+    with app.app_context():
+        print(query_latest_row())
+        print('\n',query_latest_rate('KRW'))
+        """
