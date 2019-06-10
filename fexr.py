@@ -44,6 +44,7 @@ def ping():
 def not_found_error(error):
     return render_template('404.html'), 404
 
+
 def query_latest_rate(quote):
     row = query_latest_row(quote)
     rate = row[0][2] #TODO: create class for currency rates

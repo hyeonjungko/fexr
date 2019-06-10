@@ -3,16 +3,27 @@
 	<head>
 		<title>FEXR</title>
 
+		<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="static/css/styles.css" media="screen"/>
+
 	</head>
 	<body>
-		<div id="container">
-			<h1><a href="/">Foreign Exchange Rates</h1>
+		<div class="nav">
+			<div class="nav-container">
+			  <h1><a href="/" id="logo">fexr</a></h1>
+			</div>
 		</div>
 
-		<form id="input">
-			<input type="text" id="searchbox" placeholder="Currency Code">
+		<div class="section-search">
+		  <form id="input">
+		  	<input type="text" id="searchbox" placeholder="Currency Code">
+				<br>
+		  	<input type="button" style="curor:pointer" id="search-button" value="Get Rate">
+		  </form>
+
 			<br>
-			<input type="button" style="curor:pointer" id="search-button" value="Get Rate">
-		</form>
+			<p id="rate-response">1000.00</p>
+
+		</div>
 	</body>
 </html>
