@@ -24,8 +24,10 @@ def home():
 
 @app.route('/api/rate/<quote>', methods=['GET'])
 def latest_rate(quote):
-    return str(query_latest_rate(quote))
-
+    # return str(query_latest_rate(quote))
+    # return timestamp, currency and latest rate
+    return json.dumps(query_latest_rate(quote))
+"""
 @app.route('/api/rate', methods=['GET'])
 def api_rate():
     print('REQUEST:  ',request.args)
@@ -35,6 +37,7 @@ def api_rate():
     if currency:
         rate = query_latest_rate(currency)
         return jsonify(rate)
+"""
 
 @app.route('/ping')
 def ping():
@@ -47,8 +50,12 @@ def not_found_error(error):
 
 def query_latest_rate(quote):
     row = query_latest_row(quote)
-    rate = row[0][2] #TODO: create class for currency rates
-    return rate
+    #rate = row[0][2] #TODO: create class for currency rates
+    ts = row[0][0]
+    currency = row[0][1]
+    rate = row[0][2]
+    fetched = {"timestamp":ts, "currency": currency, "rate":rate}
+    return fetched
 
 def query_latest_row(quote=None):
     """
@@ -91,9 +98,9 @@ def update_db():
             conn.commit()
     except Exception as err:
         print('ERROR:',err)
+        # TODO: need to handle Unique contraint errors
     finally:
         conn.close()
-        # TODO: does it add duplicates??
 
 def pull_latest_rate_data():
     #TODO: move apikey from config to secrets.yaml when deploying to Kubernetes
@@ -129,13 +136,12 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
-#update_db()
 """
-    print(query_db('SELECT MAX(ts), quote, rate FROM rates GROUP BY quote'))
+    print(query_db('select max(ts), quote, rate from rates group by quote'))
 
 with app.app_context():
     print(query_latest_row())
-    print('\n',query_latest_rate('KRW'))
+    print('\n',query_latest_rate('krw'))
 """
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
@@ -145,8 +151,7 @@ if __name__ == '__main__':
     #Start Flask
     app.run(debug=True)
     """
-    update_db()
     with app.app_context():
-        print(query_latest_row())
+        print(query_latest_row('KRW'))
         print('\n',query_latest_rate('KRW'))
-        """
+    """
