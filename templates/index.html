@@ -4,25 +4,28 @@
 		<title>FEXR</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
 		<link type="text/css" rel="stylesheet" href="static/css/styles.css" media="screen"/>
-		<script src="static/js/post.js" type="text/javascript"></script>
+		<script src="static/js/main.js" type="text/javascript"></script>
 
 	</head>
 	<body>
 		<div class="nav">
 			<div class="nav-container">
-			  <h1><a href="/" id="logo">fexr</a></h1>
+				<h1 id="logo"><a href="/">f oreign<br>ex change<br>r ates</a></h1>
+
+				<div class="nav" id="section-search">
+		      <form id="input">
+		      	<input type="text" id="searchbox" placeholder="currency code">
+			    	<br>
+		      	<input type="button" style="curor:pointer" id="search-button" value="get rate">
+		      </form>
+				</div>
 			</div>
 		</div>
 
-		<div class="section-search">
-		  <form id="input">
-		  	<input type="text" id="searchbox" placeholder="Currency Code">
-				<br>
-		  	<input type="button" style="curor:pointer" id="search-button" value="Get Rate">
-		  </form>
-
-			<br>
+		<div class="section-results">
 			<p id="rate-response">1000.00</p>
 
 		</div>

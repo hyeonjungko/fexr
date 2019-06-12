@@ -7,26 +7,12 @@ window.onload = () => {
   submit.addEventListener('click', displayRate);
 }
 
-
-/*
-window.onload = () => {
-	// listen for Return key
-	
-	// listen for search button
-	document.getElementById('search-button').onclick = function(element) {
-		let searched = document.getElementById('search-button').value;
-
-		try {
-			// raise error if invalid currency
-			post(searched);
-		} catch (e) {
-			// catch invalid currencies
-		}
-	}
-}
-*/
-
 const renderResponse = (res) => {
+  const inputField = document.querySelector('#searchbox');
+	inputField.style.cssText += "position: fixed; width: 10%; left: 4rem;";
+  const submit = document.querySelector('#search-button');
+	submit.style.cssText += "position: fixed; width: 10%; left: 4rem;";
+
   const responseField = document.querySelector('#rate-response');
 	if(!res){
 		console.log(res.status);

@@ -1,28 +1,48 @@
 html {
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
+    /*font-family: 'Montserrat', sans-serif;*/
+    font-family: 'Roboto Mono', monospace;
+}
+
+body {
+    background-color: rgb(109, 143, 198);
+    /*background-color: rgb(66, 244, 161);*/
+}
+
+h1 {
+    white-space: pre;
 }
 
 a {
     color: inherit;
+    text-decoration: none;
+}
+
+input {
+    /*need to change*/
+    font-family: 'Roboto Mono', monospace;
 }
 
 .nav {
     padding: 4em;
 }
 
-.section-search {
-    padding-left: 5em;
+.nav-container{
+    display: flex;
+}
+
+
+.section-results {
+    padding-left: 4em;
     padding-right: 5em;
 }
 
 #logo {
-    text-decoration: none;
+    width: 30%;
 }
 
 #searchbox {
     padding: 3px;
-    width: 50%;
+    margin-bottom: 0.5rem;
     border: none;
     font-size: 1em;
 }
@@ -30,6 +50,5 @@ a {
 #search-button {
     border: none;
     padding: 3px;
-    width: 50%;
     font-size: 1em;
 }

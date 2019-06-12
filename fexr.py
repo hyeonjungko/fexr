@@ -19,25 +19,13 @@ DATABASE = 'rates.db'
 def home():
     # send static html fiel
     # exchange rate updates in page
-    return render_template('index.html') #TODO: this is a placeholder
-    pass
+    return render_template('index.html')
 
 @app.route('/api/rate/<quote>', methods=['GET'])
 def latest_rate(quote):
     # return str(query_latest_rate(quote))
     # return timestamp, currency and latest rate
     return json.dumps(query_latest_rate(quote))
-"""
-@app.route('/api/rate', methods=['GET'])
-def api_rate():
-    print('REQUEST:  ',request.args)
-    parameters = request.args
-    currency = parameters.get('currency')
-
-    if currency:
-        rate = query_latest_rate(currency)
-        return jsonify(rate)
-"""
 
 @app.route('/ping')
 def ping():
@@ -47,7 +35,7 @@ def ping():
 def not_found_error(error):
     return render_template('404.html'), 404
 
-
+# Database
 def query_latest_rate(quote):
     row = query_latest_row(quote)
     #rate = row[0][2] #TODO: create class for currency rates
@@ -136,19 +124,13 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
-"""
-    print(query_db('select max(ts), quote, rate from rates group by quote'))
 
-with app.app_context():
-    print(query_latest_row())
-    print('\n',query_latest_rate('krw'))
-"""
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
     scheduler.add_job(update_db, 'interval', hours=1)
     scheduler.start()
 
-    #Start Flask
+    #Start Flask app
     app.run(debug=True)
     """
     with app.app_context():
