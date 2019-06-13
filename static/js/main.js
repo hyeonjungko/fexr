@@ -1,4 +1,4 @@
-// page elements
+
 window.onload = () => {
   const inputField = document.querySelector('#searchbox');
   const submit = document.querySelector('#search-button');
@@ -8,17 +8,18 @@ window.onload = () => {
 }
 
 const renderResponse = (res) => {
-  const inputField = document.querySelector('#searchbox');
-	inputField.style.cssText += "position: fixed; width: 10%; left: 4rem;";
-  const submit = document.querySelector('#search-button');
-	submit.style.cssText += "position: fixed; width: 10%; left: 4rem;";
-
+	const sSearch = document.querySelector('#section-search');
   const responseField = document.querySelector('#rate-response');
+  const sResponse = document.querySelector('.section-results');
+
+	sResponse.insertBefore(sSearch, responseField); 
+	sSearch.classList.remove("nav");
+
 	if(!res){
 		console.log(res.status);
 	}
 	if(!res.length){
-		responseField.innerHTML = 'nothing returned';
+		responseField.innerHTML = 'no rate returned';
 	}
 	responseField.innerHTML = res.rate;
 	return
@@ -47,4 +48,3 @@ const displayRate = (event) => {
 	getRate();
 }
 
-//submit.addEventListener('click', displayRate);

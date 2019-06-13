@@ -1,12 +1,17 @@
 # fexr
 ### Foreign EXchange Rates
-View the latest currency rates.
+Web application to view the latest currency rates.
+
+Built with Python and JS 
+Marked up with HTML/CSS
+Powered with Flask and SQLite3
 
 ## Update Interval
 All currency rates are updated every hour.
 
 ## TODO
 - historical graphs with each currency
+- animation to smoothen transition from homepage to results
 
 ## Supported Currencies
 Supports 168 different currencies around the world. 
