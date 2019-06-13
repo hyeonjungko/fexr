@@ -4,8 +4,7 @@ import requests
 import sqlite3
 
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask
-from flask import g, jsonify, request, render_template
+from flask import Flask, g, jsonify, request, render_template
 from requests.exceptions import HTTPError
 
 
@@ -38,7 +37,8 @@ def not_found_error(error):
 # Database
 def query_latest_rate(quote):
     row = query_latest_row(quote)
-    #rate = row[0][2] #TODO: create class for currency rates
+    #TODO: what if returned row is empty??
+    #TODO: create class for currency rates
     ts = row[0][0]
     currency = row[0][1]
     rate = row[0][2]

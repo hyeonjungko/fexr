@@ -27,7 +27,7 @@ const renderResponse = (res) => {
 
 const getRate = () => {
   const inputField = document.querySelector('#searchbox');
-	const currency = inputField.value
+	const currency = inputField.value.toUpperCase();
 	const url = `/api/rate/${currency}`
 
   const xhr = new XMLHttpRequest();
