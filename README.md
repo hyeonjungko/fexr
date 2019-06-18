@@ -12,18 +12,20 @@ Powered with Flask and SQLite3
 All currency rates are updated every hour.
 
 ## TODO
+- historical graphs with each currency
 - auto-complete for currency code search
 - function to regularly update supported currencies list
-- historical graphs with each currency
 - animation to smoothen transition from homepage to results
+- deploy site
+- optimize server with gzip compression
 
 ## Supported Currencies
 Supports 168 different currencies around the world. 
 
 All exchange rates are based on the United States Dollar (USD).
 
-|Code   |Currency Name|
-|:-----:|:-----------:|
+|Code     |Currency Name|
+|:-------:|:-----------:|
 |AED	  |United Arab Emirates Dirham|
 |AFN	  |Afghan Afghani|
 |ALL	  |Albanian Lek|
