@@ -34,11 +34,11 @@ def ping():
 def not_found_error(error):
     return render_template('404.html'), 404
 
-# Database
+#-----Database-----
 def query_latest_rate(quote):
     row = query_latest_row(quote)
     #TODO: what if returned row is empty??
-    #TODO: create class for currency rates
+    #TODO: function to pull currency rates
     ts = row[0][0]
     currency = row[0][1]
     rate = row[0][2]
@@ -61,6 +61,20 @@ def query_latest_row(quote=None):
             {quote_query}
             GROUP BY quote
             """
+    return query_db(query)
+
+def query_historical_rates(code):
+    """
+    Pull rate history for given currency
+
+    :param str code: 3 letter currency code
+    """
+    query = f"""
+            SELECT *
+            FROM rates
+            WHERE quote='{code}'
+            """
+
     return query_db(query)
 
 def query_db(query, args=(), one=False):
