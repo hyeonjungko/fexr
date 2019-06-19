@@ -127,7 +127,8 @@ def init_db():
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler()
-    scheduler.add_job(update_db, 'interval', hours=1)
+    scheduler.add_job(update_db, 'interval', hours=1,
+                      misfire_grace_time=1800, coalesce=True)
     scheduler.start()
 
     #Start Flask app

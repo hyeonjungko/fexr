@@ -12,6 +12,7 @@ Powered with Flask and SQLite3
 All currency rates are updated every hour.
 
 ## TODO
+- figure out the cause of unique constraint errors
 - historical graphs with each currency
 - auto-complete for currency code search
 - function to regularly update supported currencies list
