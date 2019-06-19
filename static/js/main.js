@@ -11,9 +11,10 @@ const renderResponse = (res) => {
 	const sSearch = document.querySelector('#section-search');
   const responseField = document.querySelector('#rate-response');
   const sResponse = document.querySelector('.section-results');
+	const diver = document.querySelector('#divider');
 
-	sResponse.insertBefore(sSearch, responseField); 
-	sSearch.classList.remove("nav");
+	//sResponse.insertBefore(sSearch, divider); 
+	//sSearch.classList.remove("nav");
 
 	if(!res){
 		console.log(res.status);

@@ -1,11 +1,36 @@
+@font-face {
+    font-family: 'SpaceGrotesk-SemiBold';
+    src: url('../fonts/SpaceGrotesk-SemiBold.woff2') format('woff2'),
+         url('../fonts/SpaceGrotesk-SemiBold.woff') format('woff');
+}
+@font-face {
+    font-family: 'SpaceGrotesk-Regular';
+    src: url('../fonts/SpaceGrotesk-Regular.woff2') format('woff2'),
+         url('../fonts/SpaceGrotesk-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'SpaceGrotesk-Medium';
+    src: url('../fonts/SpaceGrotesk-Medium.woff2') format('woff2'),
+         url('../fonts/SpaceGrotesk-Medium.woff') format('woff');
+}
+@font-face {
+    font-family: 'SpaceGrotesk-Light';
+    src: url('../fonts/SpaceGrotesk-Light.woff2') format('woff2'),
+         url('../fonts/SpaceGrotesk-Light.woff') format('woff');
+}
+@font-face {
+    font-family: 'SpaceGrotesk-Bold';
+    src: url('../fonts/SpaceGrotesk-Bold.woff2') format('woff2'),
+         url('../fonts/SpaceGrotesk-Bold.woff') format('woff');
+}
+
 html {
-    /*font-family: 'Montserrat', sans-serif;*/
     font-family: 'Roboto Mono', monospace;
 }
 
 body {
-    background-color: rgb(109, 143, 198);
-    /*background-color: rgb(66, 244, 161);*/
+    font-size: 90%;
+    background-color: rgb(72, 133, 237);
 }
 
 h1 {
@@ -18,14 +43,14 @@ a {
 }
 
 input {
-    /*need to change*/
-    font-family: 'Roboto Mono', monospace;
-    /*border: 1px solid #000;*/
+    background: transparent;
+    font-family: 'Lato', sans-serif;
     border: none;
 }
 
 .nav {
     padding: 4em;
+    text-align: center;
 }
 
 button {
@@ -36,24 +61,36 @@ button {
   box-sizing: border-box;
 }
 
+.container {
+    text-align: center;
+}
+
 .nav-container{
-    display: flex;
+    display: inline-block;
 }
 
 .section-results {
     padding-left: 4em;
     padding-right: 5em;
+    text-align: center;
 }
 
 #logo {
-    width: 30%;
+    /*width: 30%;*/
+    display: inline-block;
+    font-family: 'SpaceGrotesk-SemiBold';
+    font-size: 2em;
+    color: #fff4db;
+}
+
+#divider {
+    
 }
 
 #section-search {
     display:inline-block;
-    margin-right: 20%;
-    width: 5%;
-    min-width: 9rem;
+    min-width: 9em;
+    margin: 3em;
 }
 
 #searchbox {
@@ -61,14 +98,23 @@ button {
     width: 100%;
     padding: 3px;
     margin-bottom: 0.5rem;
-    text-align: center;
-    font-size: 1em;
+    border-bottom: 1px solid black;
+    font-size: 4em;
+    caret-color: #000000;
+    outline: none;
+}
+
+#searchbox::placeholder {
+    color: rgb(213, 217, 224);
+    opacity: 0.3;
 }
 
 #search-button {
     width: 100%;
     padding: 3px;
     font-size: 1em;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 #rate-response {
