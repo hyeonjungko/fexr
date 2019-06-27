@@ -12,6 +12,7 @@ Powered with Flask and SQLite3
 All currency rates are updated every hour.
 
 ## TODO
+- JS: listen for `return` key for currency search
 - FEXR logo animation
 - historical graphs with each currency
 - display currency symbols with rate results
